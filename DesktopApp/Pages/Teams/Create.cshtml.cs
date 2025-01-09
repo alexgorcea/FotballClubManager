@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DesktopApp.Data;
 using DesktopApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DesktopApp.Pages.Teams
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly DesktopApp.Data.DesktopAppContext _context;

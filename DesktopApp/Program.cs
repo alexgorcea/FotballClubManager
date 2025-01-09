@@ -1,12 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using DesktopApp.Data;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+});
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Players");
+    options.Conventions.AuthorizeFolder("/Coaches", "AdminPolicy");
+    options.Conventions.AuthorizeFolder("/Teams", "AdminPolicy");
+    options.Conventions.AuthorizeFolder("/Feedbacks");
+    options.Conventions.AuthorizeFolder("/TrainingSessions");
+});
+
 builder.Services.AddDbContext<DesktopAppContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DesktopAppContext") ?? throw new InvalidOperationException("Connection string 'DesktopAppContext' not found.")));
+
+builder.Services.AddDbContext<DesktopAppIdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DesktopAppContext") ?? throw new InvalidOperationException("Connectionstring 'DesktopAppContext' not found.")));
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<DesktopAppIdentityContext>();
 
 var app = builder.Build();
 

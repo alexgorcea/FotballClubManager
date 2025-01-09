@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DesktopApp.Data;
 using DesktopApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DesktopApp.Pages.Teams
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly DesktopApp.Data.DesktopAppContext _context;

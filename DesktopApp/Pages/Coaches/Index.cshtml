@@ -7,9 +7,6 @@
 
 <h1>Coaches</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -46,7 +43,7 @@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.CoachId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.CoachId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CoachId">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@item.CoachId">Delete</a> |
             </td>
         </tr>
 }

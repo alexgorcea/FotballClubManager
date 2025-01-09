@@ -9,14 +9,14 @@ namespace DesktopApp.Models
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "First Name is required")]
         [StringLength(50, ErrorMessage = "First Name can't be longer than 50 characters")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last Name is required")]
         [StringLength(50, ErrorMessage = "Last Name can't be longer than 50 characters")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        public String FullName
+        public String? FullName
         {
             get
             {
@@ -26,7 +26,7 @@ namespace DesktopApp.Models
 
         [EmailAddress(ErrorMessage = "Invalid email address")]
         [Required(ErrorMessage = "Email is required")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Display(Name = "Team")]
         public int? TeamId { get; set; }
