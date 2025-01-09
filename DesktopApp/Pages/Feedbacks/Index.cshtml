@@ -1,0 +1,54 @@
+﻿@page
+@model DesktopApp.Pages.Feedbacks.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Feedback</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Feedback[0].Player)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feedback[0].TrainingSession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feedback[0].Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feedback[0].Comments)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Feedback) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingSession.ScheduledDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FeedbackId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.FeedbackId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FeedbackId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
